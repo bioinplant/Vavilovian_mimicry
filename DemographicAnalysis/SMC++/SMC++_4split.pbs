@@ -1,0 +1,24 @@
+###define PBS arguments
+#PBS -N split
+#PBS -l nodes=node2:ppn=5,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o split_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+###compute split time
+
+/root/anaconda3/bin/smc++ split -o ./ pop1/model.final.json pop2/model.final.json ../pop1_pop2/*.smc.gz
+
+###job finished reminder
+echo "Finished at:"
+date

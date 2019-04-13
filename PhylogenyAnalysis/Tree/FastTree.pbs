@@ -1,0 +1,24 @@
+###define PBS arguments
+#PBS -N PhyloTree
+#PBS -l nodes=node4:ppn=10,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o PhyloTree_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+### input: aligned sequences from the output of 5_haplotype2seq.pl;
+
+FastTree-M -nt sequence.fa > EC.nwk
+
+###job finished reminder
+echo "Finished at:"
+date

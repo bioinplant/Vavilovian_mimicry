@@ -1,0 +1,22 @@
+###define PBS arguments
+#PBS -N PopGenome
+#PBS -l nodes=node3:ppn=5,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o Popgenome_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+for i in `seq 1 4500`;do scaf="scaffold"${i}; Rscript /***/popgenome_pipeline.R /***/EC_Yangtze_filtered_maf1missing20.vcf.gz  /***/MIC_M.txt  /***/NMC_N.txt  $scaf ; done
+
+###job finished reminder
+echo "Finished at:"
+date

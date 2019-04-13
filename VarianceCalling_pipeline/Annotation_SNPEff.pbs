@@ -1,0 +1,24 @@
+###define PBS arguments
+#PBS -N SNP_InDel_annotation
+#PBS -l nodes=node21:ppn=5,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o SNP_Indel_annotation_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+java -Xmx20g -jar /***/snpEff.jar Ecrusgalli all_EC_Indel_maf1missing20.vcf > all_EC_maf1missing20.anno.vcf
+
+perl -alne 'next if $_ =~ /^#/;$F[7] =~ /(ANN=\S+)/;print "$F[0]\t$F[1]\t$F[2]\t$F[3]\t$F[4]\t$1"'  all_EC_maf1missing20.anno.vcf > all_EC_Indel_maf1missing20.anno
+
+###job finished reminder
+echo "Finished at:"
+date

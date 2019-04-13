@@ -1,0 +1,22 @@
+###define PBS arguments
+#PBS -N tabix
+#PBS -l nodes=node2:ppn=5,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o tabix_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+/***/htslib/htslib-1.8/tabix EC_Yangtze_filtered.vcf.gz
+
+###job finished reminder
+echo "Finished at:"
+date

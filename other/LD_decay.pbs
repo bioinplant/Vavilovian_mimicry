@@ -1,0 +1,23 @@
+###define PBS arguments
+#PBS -N LD_decay
+#PBS -l nodes=node4:ppn=10,walltime=2400:00:00
+#PBS -q high
+#PBS -j oe
+#PBS -o LD_decay_log
+
+###job starting reminder
+echo "Starting job at:"
+date
+hostname
+
+###job dir
+cd $PBS_O_WORKDIR
+
+###job command
+
+/***/PopLDdecay3.29/bin/PopLDdecay -InVCF EC_Yangtze_filtered_maf1missing20.vcf -MaxDist 400 -OutStat MIC_M -SubPop /***/MIC_M.txt
+/***/PopLDdecay3.29/bin/PopLDdecay -InVCF EC_Yangtze_filtered_maf1missing20.vcf -MaxDist 400 -OutStat NMC_N -SubPop /***/NMC_N.txt
+
+###job finished reminder
+echo "Finished at:"
+date
